@@ -3,7 +3,6 @@
 import base64
 import binascii
 import json
-import platform
 import shutil
 from configparser import ConfigParser
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -14,13 +13,6 @@ import requests
 from winsdk.windows.data.xml import dom
 from winsdk.windows.ui.notifications import ToastNotification, ToastNotificationManager
 
-try:
-    from ctypes import windll
-
-    myappid = "d9_scratch.forwardnotifier"
-    windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-except ImportError:
-    pass
 
 config = ConfigParser()
 
@@ -174,5 +166,5 @@ def run() -> None:
         httpd.server_close()
 
 
-if platform.system() == "Windows":
+if __name__ == "__main__":
     run()
